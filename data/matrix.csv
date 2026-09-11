@@ -1,0 +1,18 @@
+# matrix.csv — rows = phases (data/phases.yaml), columns = controls (data/controls.yaml)
+# Cell format:  verdict|note   where verdict is one of: yes | partial | no | TODO
+#   yes     = this control alone would have interrupted the phase
+#   partial = slows / degrades / detects but does not stop the phase
+#   no      = irrelevant to this phase
+# Lines starting with '#' are ignored by scripts/build_matrix.py.
+# Cells pre-seeded with 'TODO|seed: ...' are expected hits — confirm or reject them.
+phase_id,C01,C02,C03,C04,C05,C06,C07,C08,C09,C10,C11,C12,C13,C14,C15,C16
+P01,TODO|seed: egress allowlist limits blast radius of proxy 0-day,TODO|seed: proxy in own trust boundary -> escape yields only the proxy,TODO,TODO,TODO,TODO,TODO,TODO,TODO,TODO,TODO,TODO,TODO,TODO,TODO,TODO
+P02,TODO,TODO,TODO|seed: non-root + auth on RCE surface,TODO,TODO,TODO,TODO,TODO,TODO,TODO,TODO,TODO,TODO,TODO,TODO,TODO
+P03,TODO,TODO,TODO,TODO|seed: HDF5 local path rejected before I/O,TODO,TODO,TODO,TODO,TODO,TODO,TODO,TODO,TODO,TODO,TODO,TODO
+P04,TODO,TODO,TODO,TODO,TODO|seed: SandboxedEnvironment blocks exec reach,TODO,TODO,TODO,TODO,TODO,TODO,TODO,TODO,TODO,TODO,TODO
+P05,TODO,TODO,TODO,TODO,TODO,TODO|seed: pod egress allowlist blocks pastebin/request-capture C2,TODO|seed: multi-stage correlation should have paged here,TODO,TODO,TODO,TODO,TODO,TODO,TODO,TODO,TODO
+P06,TODO,TODO,TODO,TODO,TODO,TODO,TODO,TODO|seed: block metadata endpoint,TODO|seed: no automounted SA token to read,TODO,TODO,TODO,TODO,TODO,TODO,TODO
+P07,TODO,TODO,TODO,TODO,TODO,TODO,TODO,TODO,TODO,TODO|seed: no privileged pod / hostPath -> no node escape,TODO,TODO,TODO,TODO,TODO,TODO|seed: cordon runbook limits fleet spread
+P08,TODO,TODO,TODO,TODO,TODO,TODO,TODO,TODO,TODO,TODO,"TODO|seed: per-workload secrets, no 136-key blob",TODO,TODO,TODO,TODO,TODO
+P09,TODO,TODO,TODO,TODO,TODO,TODO,TODO,TODO,TODO,TODO,TODO,"TODO|seed: scoped per-cluster credentials, no shared system:masters",TODO|seed: mesh enrollment needs device identity + approval,TODO,TODO,TODO
+P10,TODO,TODO,TODO,TODO,TODO,TODO|seed: egress allowlist breaks pastebin-refetch loader,TODO,TODO,TODO,TODO,TODO,TODO,TODO,TODO|seed: DB allowlist actually blocked this in the incident,TODO|seed: secret-less CI for untrusted PRs blocks CI poison,TODO
