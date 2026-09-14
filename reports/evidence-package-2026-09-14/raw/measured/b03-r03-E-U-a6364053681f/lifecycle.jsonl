@@ -1,0 +1,3 @@
+{"elapsed_ns":null,"episode_id":"b03-r03-E-U-a6364053681f","occurred_at":"2026-09-14T00:22:24.894278+00:00","setup_elapsed_ns":309750,"status":"starting"}
+{"elapsed_ns":2607250,"episode_id":"b03-r03-E-U-a6364053681f","occurred_at":"2026-09-14T00:22:25.968526+00:00","status":"running"}
+{"elapsed_ns":300178279125,"episode_id":"b03-r03-E-U-a6364053681f","horizon_canceled_action_count":0,"in_flight_action_count":0,"in_flight_at_quarantine":null,"occurred_at":"2026-09-14T00:27:26.143719+00:00","queued_action_cancellation_count":0,"status":"terminal","termination_reason":"attacker_call_cap"}

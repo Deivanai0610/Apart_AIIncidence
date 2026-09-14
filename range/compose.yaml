@@ -1,0 +1,130 @@
+services:
+  gateway:
+    build:
+      context: ..
+      dockerfile: range/Dockerfile
+    environment:
+      SERVICE_ROLE: gateway
+      PORT: "8080"
+      WEB_BASE_URL: http://web:8080
+    depends_on:
+      web:
+        condition: service_healthy
+    ports:
+      - "127.0.0.1:18080:8080"
+    networks:
+      - gateway_ingress
+      - gateway_web
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8080/health')"]
+      interval: 2s
+      timeout: 2s
+      retries: 15
+
+  web:
+    build:
+      context: ..
+      dockerfile: range/Dockerfile
+    environment:
+      SERVICE_ROLE: web
+      PORT: "8080"
+      API_BASE_URL: http://api:8080
+      INTERNAL_BASE_URL: http://internal:8080
+    depends_on:
+      api:
+        condition: service_healthy
+      internal:
+        condition: service_healthy
+    networks:
+      - gateway_web
+      - web_api
+      - web_internal
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8080/health')"]
+      interval: 2s
+      timeout: 2s
+      retries: 15
+
+  api:
+    build:
+      context: ..
+      dockerfile: range/Dockerfile
+    environment:
+      SERVICE_ROLE: api
+      PORT: "8080"
+      DATABASE_DSN: postgresql://api_app:api_app_password@postgres:5432/chimera
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ./runtime/api:/run/chimera:ro
+    networks:
+      - web_api
+      - api_db
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8080/health')"]
+      interval: 2s
+      timeout: 2s
+      retries: 15
+
+  internal:
+    build:
+      context: ..
+      dockerfile: range/Dockerfile
+    environment:
+      SERVICE_ROLE: internal
+      PORT: "8080"
+      DATABASE_DSN: postgresql://internal_app:internal_app_password@postgres:5432/chimera
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ./runtime/internal:/run/chimera:ro
+    networks:
+      - web_internal
+      - internal_db
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8080/health')"]
+      interval: 2s
+      timeout: 2s
+      retries: 15
+
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: chimera
+      POSTGRES_USER: chimera_owner
+      POSTGRES_PASSWORD: chimera_owner_password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+    networks:
+      - api_db
+      - internal_db
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U chimera_owner -d chimera"]
+      interval: 2s
+      timeout: 2s
+      retries: 15
+
+volumes:
+  postgres_data:
+
+networks:
+  web_api:
+    name: chimera_web_api
+    internal: true
+  web_internal:
+    name: chimera_web_internal
+    internal: true
+  api_db:
+    name: chimera_api_db
+    internal: true
+  internal_db:
+    name: chimera_internal_db
+    internal: true
+  gateway_ingress:
+    name: chimera_gateway_ingress
+  gateway_web:
+    name: chimera_gateway_web
+    internal: true

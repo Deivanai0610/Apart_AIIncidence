@@ -1,4 +1,19 @@
-out/
-__pycache__/
-*.pyc
 .venv/
+.worktrees/
+.DS_Store
+*.egg-info/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+range/runtime/
+artifacts/runs/
+# LaTeX build products
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.out
+*.log
+*.synctex.gz

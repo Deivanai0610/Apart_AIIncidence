@@ -1,0 +1,3 @@
+{"elapsed_ns":10136416,"occurred_at":"2026-09-13T22:56:59.006433+00:00","route":"api","status":"scheduled"}
+{"elapsed_ns":150011209541,"occurred_at":"2026-09-13T22:59:29.009027+00:00","route":"api","status":"started"}
+{"completed":false,"elapsed_ns":150050399291,"occurred_at":"2026-09-13T22:59:29.048216+00:00","reason":"range_request_failed","route":"api"}

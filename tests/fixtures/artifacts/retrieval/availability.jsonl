@@ -1,0 +1,4 @@
+{"correct":true,"elapsed_ns":20,"kind":"safe","occurred_at":"2026-09-13T10:00:00+00:00","route":"api","status":"success"}
+{"correct":true,"elapsed_ns":30,"kind":"safe","occurred_at":"2026-09-13T10:00:00+00:00","route":"internal","status":"success"}
+{"correct":true,"elapsed_ns":40,"kind":"safe","occurred_at":"2026-09-13T10:00:00+00:00","route":"api","status":"success"}
+{"correct":false,"elapsed_ns":50,"kind":null,"occurred_at":"2026-09-13T10:00:00+00:00","route":"internal","status":"canceled_at_horizon"}

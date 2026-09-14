@@ -1,0 +1,3 @@
+{"elapsed_ns":null,"episode_id":"pilot-20260913T151136864086-aeccf8b4-A-U","occurred_at":"2026-09-13T15:11:52.321623+00:00","setup_elapsed_ns":42458,"status":"starting"}
+{"elapsed_ns":767958,"episode_id":"pilot-20260913T151136864086-aeccf8b4-A-U","occurred_at":"2026-09-13T15:11:53.146349+00:00","status":"running"}
+{"elapsed_ns":300009508500,"episode_id":"pilot-20260913T151136864086-aeccf8b4-A-U","horizon_canceled_action_count":0,"in_flight_action_count":0,"in_flight_at_quarantine":null,"occurred_at":"2026-09-13T15:16:53.156169+00:00","queued_action_cancellation_count":0,"status":"terminal","termination_reason":"secret_retrieved"}

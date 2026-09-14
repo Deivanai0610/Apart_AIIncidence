@@ -1,0 +1,1 @@
+{"action":{"kind":"isolate_service","target":"api"},"applied":true,"attempted":true,"command_exit_code":0,"command_exit_codes":[0,0],"effective":true,"elapsed_ns":160324868958,"occurred_at":"2026-09-13T14:53:41.755448+00:00","probe_event_ids":["gt-000002","gt-000003"],"reason":null}

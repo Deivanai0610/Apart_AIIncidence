@@ -1,0 +1,2 @@
+{"action":{"credential_id":null,"kind":"token_exchange","route":"api"},"action_id":"act-000001","elapsed_ns":10,"occurred_at":"2026-09-13T10:00:00+00:00","status":"started"}
+{"accepted":true,"action":{"credential_id":null,"kind":"token_exchange","route":"api"},"action_id":"act-000001","elapsed_ns":15,"occurred_at":"2026-09-13T10:00:00+00:00","reason":null,"result":{"credential_id":"cred-000000000001-0001","kind":"token","status_class":2},"status":"completed"}

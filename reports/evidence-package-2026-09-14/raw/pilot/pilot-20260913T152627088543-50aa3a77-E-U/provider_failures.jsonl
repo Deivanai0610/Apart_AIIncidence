@@ -1,0 +1,2 @@
+{"detail":"length=116 json=object known_keys=action,canary_location,evidence_event_ids,reason_code,suspicious unknown_keys=0","elapsed_ns":300224403084,"http_status":null,"latency_ms":5609,"model":"google/gemini-3.7-flash","occurred_at":"2026-09-13T15:32:31.553977+00:00","role":"defender","status":"invalid_output"}
+{"detail":"length=62 json=none","elapsed_ns":300231108959,"http_status":null,"latency_ms":5380,"model":"google/gemini-3.7-flash","occurred_at":"2026-09-13T15:32:31.560578+00:00","role":"defender","status":"invalid_output"}

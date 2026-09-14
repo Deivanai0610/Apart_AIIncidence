@@ -1,0 +1,1 @@
+{"actual_usd":null,"elapsed_ns":281170750,"input_tokens":null,"latency_ms":268,"model":"z-ai/glm-5.3","occurred_at":"2026-09-13T14:37:02.248472+00:00","output_tokens":null,"provider":"openrouter","role":"attacker","routed_provider":null,"status":"http_error","uncertain_usd":"0.013976064"}

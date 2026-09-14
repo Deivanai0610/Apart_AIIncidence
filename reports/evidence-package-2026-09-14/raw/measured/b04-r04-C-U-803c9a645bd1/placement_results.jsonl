@@ -1,0 +1,10 @@
+{"applied":false,"attempted":false,"effective":false,"elapsed_ns":941328334,"occurred_at":"2026-09-14T06:42:38.489166+00:00","reason":"placement_redundant","route":"api"}
+{"applied":false,"attempted":false,"effective":false,"elapsed_ns":1766578584,"occurred_at":"2026-09-14T06:42:39.314414+00:00","reason":"placement_redundant","route":"api"}
+{"applied":false,"attempted":false,"effective":false,"elapsed_ns":3081789084,"occurred_at":"2026-09-14T06:42:40.629619+00:00","reason":"placement_redundant","route":"api"}
+{"applied":false,"attempted":false,"effective":false,"elapsed_ns":3816604417,"occurred_at":"2026-09-14T06:42:41.364431+00:00","reason":"placement_redundant","route":"api"}
+{"applied":false,"attempted":false,"effective":false,"elapsed_ns":5238347084,"occurred_at":"2026-09-14T06:42:42.786168+00:00","reason":"placement_not_permitted","route":"api"}
+{"applied":false,"attempted":false,"effective":false,"elapsed_ns":150024327792,"occurred_at":"2026-09-14T06:45:07.571583+00:00","reason":"placement_not_permitted","route":"api"}
+{"applied":false,"attempted":false,"effective":false,"elapsed_ns":150031464167,"occurred_at":"2026-09-14T06:45:07.578719+00:00","reason":"placement_not_permitted","route":"api"}
+{"applied":false,"attempted":false,"effective":false,"elapsed_ns":150040484584,"occurred_at":"2026-09-14T06:45:07.587740+00:00","reason":"placement_not_permitted","route":"api"}
+{"applied":false,"attempted":false,"effective":false,"elapsed_ns":150047358125,"occurred_at":"2026-09-14T06:45:07.594613+00:00","reason":"placement_not_permitted","route":"api"}
+{"applied":false,"attempted":false,"effective":false,"elapsed_ns":150074293917,"occurred_at":"2026-09-14T06:45:07.621549+00:00","reason":"placement_not_permitted","route":"api"}

@@ -1,0 +1,2 @@
+{"action":{"kind":"block_edge","target":"web_api"},"applied":true,"attempted":true,"command_exit_code":0,"command_exit_codes":[0],"effective":true,"elapsed_ns":32770252875,"occurred_at":"2026-09-14T07:15:06.464530+00:00","probe_event_ids":["gt-000001","gt-000002"],"reason":null}
+{"action":{"kind":"isolate_service","target":"web"},"applied":true,"attempted":true,"command_exit_code":0,"command_exit_codes":[0,0,0],"effective":true,"elapsed_ns":81041615209,"occurred_at":"2026-09-14T07:15:54.735928+00:00","probe_event_ids":["gt-000006","gt-000007"],"reason":null}

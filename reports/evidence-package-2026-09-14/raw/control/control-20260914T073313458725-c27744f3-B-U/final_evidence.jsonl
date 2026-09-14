@@ -1,0 +1,1 @@
+{"elapsed_ns":300066480750,"occurred_at":"2026-09-14T07:38:30.404369+00:00","quarantine":null,"reason":"independent_evidence_recorded","restrictions":[{"action":{"kind":"block_edge","target":"web_api"},"effective":true,"probe_event_ids":["gt-000004","gt-000005"],"reason":null}],"verified_containment":null}

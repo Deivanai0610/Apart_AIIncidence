@@ -1,0 +1,12 @@
+{"applied":false,"attempted":false,"effective":false,"elapsed_ns":1077468500,"occurred_at":"2026-09-13T22:25:19.520809+00:00","reason":"placement_redundant","route":"api"}
+{"applied":false,"attempted":false,"effective":false,"elapsed_ns":2126592708,"occurred_at":"2026-09-13T22:25:20.569935+00:00","reason":"placement_redundant","route":"api"}
+{"applied":false,"attempted":false,"effective":false,"elapsed_ns":3714492792,"occurred_at":"2026-09-13T22:25:22.157837+00:00","reason":"placement_redundant","route":"api"}
+{"applied":false,"attempted":false,"effective":false,"elapsed_ns":4763213917,"occurred_at":"2026-09-13T22:25:23.206559+00:00","reason":"placement_redundant","route":"api"}
+{"applied":false,"attempted":false,"effective":false,"elapsed_ns":4763442667,"occurred_at":"2026-09-13T22:25:23.206788+00:00","reason":"placement_redundant","route":"api"}
+{"applied":false,"attempted":false,"effective":false,"elapsed_ns":6245627500,"occurred_at":"2026-09-13T22:25:24.688975+00:00","reason":"placement_redundant","route":"api"}
+{"applied":false,"attempted":false,"effective":false,"elapsed_ns":8023514292,"occurred_at":"2026-09-13T22:25:26.466865+00:00","reason":"placement_redundant","route":"api"}
+{"applied":false,"attempted":false,"effective":false,"elapsed_ns":10016921292,"occurred_at":"2026-09-13T22:25:28.460275+00:00","reason":"placement_redundant","route":"api"}
+{"applied":false,"attempted":false,"effective":false,"elapsed_ns":12137216292,"occurred_at":"2026-09-13T22:25:30.580573+00:00","reason":"placement_redundant","route":"api"}
+{"applied":false,"attempted":false,"effective":false,"elapsed_ns":13255573500,"occurred_at":"2026-09-13T22:25:31.698931+00:00","reason":"placement_not_permitted","route":"api"}
+{"applied":false,"attempted":false,"effective":false,"elapsed_ns":150035544083,"occurred_at":"2026-09-13T22:27:48.479106+00:00","reason":"placement_not_permitted","route":"api"}
+{"applied":false,"attempted":false,"effective":false,"elapsed_ns":150048565417,"occurred_at":"2026-09-13T22:27:48.492126+00:00","reason":"placement_not_permitted","route":"api"}

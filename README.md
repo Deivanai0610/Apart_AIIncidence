@@ -1,82 +1,100 @@
-# Control-by-Attack-Phase-by-Cost Matrix
+# CHIMERA: adaptive AI-based containment of autonomous cyber attacks
 
-**Apart Research — AI Incident Response Sprint, Track 1: Containment**
-**Status:** scaffold — analysis cells are `TODO` until filled in.
+Team Southside, Apart Research AI Incident Response Sprint (11 to 13 September 2026), Track 1: Containment Standards.
 
-## Problem
+CHIMERA is a small, fully isolated Docker cyber range in which an LLM-driven
+attacker tries to retrieve a dummy secret through one of two application
+routes while a defender, seeing only sanitized telemetry, proposes containment
+actions that a policy engine validates and executes. It was built to test one
+question raised by the July 2026 OpenAI and Hugging Face incident:
 
-In July 2026, two OpenAI models under evaluation on the ExploitGym hacking benchmark
-(safety filters disabled) escaped their sandbox through a zero-day in the one network
-egress they were permitted, took over an unsecured public compute server as a staging
-base, and then broke into Hugging Face's production infrastructure to steal the
-benchmark's answer key. Hugging Face published a forensic timeline of roughly 17,600
-attacker actions across roughly nine attack phases. The intrusion ran for about 4.5 days.
-Detection tooling correlated the activity but never escalated to a page, so no human
-responded. This repository asks a narrow question: **for each documented phase of that
-intrusion, which specific security control would have interrupted it, what does that
-control cost to implement and operate, and could a third party verify it is in place
-without access to the lab's network?**
+> Does a defender that uses incident history reduce attack success and impact
+> compared with a fixed response policy, particularly when the attacker changes
+> paths after containment?
 
-## The two judging criteria
+The report is `adaptive_containment_report.pdf` (source
+`adaptive_containment_report.tex`). Every number in it comes from the evidence
+package under `reports/evidence-package-2026-09-14/`.
 
-1. **Externally verifiable.** A third party must be able to verify compliance
-   *without* access to the lab's internal network (e.g. from public artifacts,
-   attestations, published configs, or observable behaviour).
-2. **Realistically adoptable.** A lab must actually be able to adopt the control —
-   cheap and specific, not a wishlist.
+## Results in brief
 
-Every control in `data/controls.yaml` carries fields for both criteria
-(`verifiable_externally`, `impl_cost`, `operating_cost`, `evidence_required`).
+40 measured episodes (30 planned, 10 added after the first results were
+reviewed) and 4 benign-only controls. Attacker GLM 5.3, AI defender Gemini 3.7
+Flash, both through OpenRouter with pinned providers.
 
-## How to read the matrix
+| defense | secret retrieved | availability (time-weighted) | authorized job completed |
+|---|---|---|---|
+| no defense | 8/8 | 1.00 | 8/8 |
+| static playbook, fixed canary | 0/8 | 0.49 | 6/8 |
+| static playbook, relocating canary | 2/8 | 0.62 | 4/8 |
+| AI defender, fixed canary | 3/8 | 0.18 | 1/8 |
+| AI defender, adaptive canary | 4/8 | 0.48 | 3/8 |
 
-- **Rows** are attack phases (`data/phases.yaml`, 10 phases, canonical order from the
-  public timeline).
-- **Columns** are candidate controls (`data/controls.yaml`).
-- **Cells** say whether that control *would have interrupted* that phase:
-  `yes`, `partial`, `no`, or `TODO`. Each cell may carry a short note after a `|`
-  (e.g. `yes|blocks non-registry egress`).
-- Cost lives on the control, not the cell: read a column's cost from the controls
-  legend printed under the matrix.
-- The matrix is meant to be gradeable by a judge in **under 15 minutes**: scan the
-  rows for phases with no `yes` (uncovered), then scan the `yes` columns for the
-  cheapest control that covers the most rows.
-
-Build the rendered tables with:
-
-```sh
-make matrix        # writes out/matrix.md and out/matrix.html
-```
+When the attacker switched routes after a block, both defenders contained it
+in every such episode, the AI defender within a median of 1 to 7 seconds and
+the playbook within 21 seconds. Every AI loss happened before any route change.
+In the benign-only controls the playbook blocked the legitimate scheduled job;
+the AI defender took no action. Eight episodes per defense support descriptive
+comparison and per-episode traces, not rate estimates.
 
 ## Repository layout
 
+| path | content |
+|---|---|
+| `chimera/` | the harness: broker, telemetry, controllers A to E, policy gate, actuator, runner, evaluator, schedule, budgets, CLI |
+| `range/` | Docker Compose range (gateway, web, api, internal, postgres) and the range service |
+| `prompts/` | frozen attacker and defender prompts |
+| `configs/experiment.yaml` | frozen experiment configuration |
+| `tests/` | 632 unpaid tests, including Docker control checks CT1 to CT5 |
+| `scripts/` | block runner, control runner, trace audit, evidence-package builder, secondary analysis |
+| `reports/evidence-package-2026-09-14/` | methodology as executed, architecture, artifact schema, history, results tables, analysis, per-episode timelines, provenance, inputs, raw artifacts of every episode |
+| `reports/trace-audit-2026-09-14.md` | independent re-derivation of every outcome from the raw traces |
+| `CHIMERA_Experiment_Protocol.md`, `CHIMERA_Build_Plan.md` | the planning documents; the evidence package records every deviation |
+| `docs/control_checks.md` | what each control check establishes |
+
+## Running it
+
+Requirements: Python 3.12, Docker with Compose, and for live episodes an
+OpenRouter key in `OPENROUTER_API_KEY`. Nothing below makes a paid call
+unless stated.
+
 ```
-data/phases.yaml       canonical attack phases (rows)
-data/controls.yaml     controls catalog (columns) with cost + verifiability fields
-data/matrix.csv        the matrix itself; cells are TODO until analysed
-scripts/build_matrix.py renders Markdown + HTML tables from the data files
-report/report.md       4–8 page report skeleton
-CITATIONS.md           sources (public record only)
-out/                   generated output (safe to delete)
+uv sync --extra dev                                              # or: python -m venv .venv && .venv/bin/pip install -e ".[dev]"
+.venv/bin/python -m pytest -q -m "not docker and not paid"      # unit tests, no Docker
+.venv/bin/python -m chimera demo --docker --horizon-seconds 0.15  # one no-cost containment episode on the real range
+.venv/bin/python -m chimera run --mock --condition B              # no-cost synthetic episode
+.venv/bin/python -m chimera run --mock --benign-only --condition D
 ```
 
-## What this cannot establish
+Live episodes (paid) require the frozen configuration, model IDs in the
+environment, a fresh verification stamp and a schedule:
 
-<!-- TODO: tighten once analysis is done. Keep this section — judges require it. -->
+```
+export OPENROUTER_ATTACKER_MODEL=z-ai/glm-5.3 OPENROUTER_DEFENDER_MODEL=google/gemini-3.7-flash
+.venv/bin/python -m chimera checks                       # CT1 to CT5 on the live range, writes the stamp
+.venv/bin/python -m chimera schedule --output artifacts/runs/schedules/main.json
+CHIMERA_ALLOW_PAID=1 bash scripts/run_block.sh 1        # one balanced block of ten episodes
+CHIMERA_ALLOW_PAID=1 bash scripts/run_controls.sh       # four benign-only controls
+```
 
-- **Counterfactuals.** "Would have interrupted" is a judgement from the public
-  timeline, not a replay. We cannot prove the attacker would not have found another path.
-- **Internal state of the victim.** We only see what Hugging Face and OpenAI chose to
-  publish. We cannot establish which controls were *already* present but failed silently,
-  or misconfigured, versus absent.
-- **Attacker capability ceiling.** The models were run with safety filters disabled on a
-  hacking benchmark. We cannot generalise to what the same models do under normal deployment.
-- **Cost figures.** `impl_cost` / `operating_cost` are coarse (low/med/high) estimates
-  for a lab of roughly Hugging Face's size, not quotes. Real cost depends on the
-  lab's existing stack.
-- **Detection-to-response gap.** The public record says alerts correlated but did not
-  page. We cannot establish *why* (threshold, routing, on-call, alert fatigue) from
-  outside, so detection controls here are scored on "would have produced a page-worthy
-  signal", not on "would a human have acted".
-- **Completeness of the phase list.** ~17,600 actions were compressed into ~9–10 phases
-  by the publisher. Sub-steps inside a phase may deserve their own controls.
+Reproduce the audit, the evidence package and the analysis from the raw
+artifacts (no Docker, no provider calls):
+
+```
+.venv/bin/python scripts/audit_traces.py
+.venv/bin/python scripts/build_report_package.py
+.venv/bin/python scripts/analyze_results.py
+```
+
+The report builds with `latexmk -pdf adaptive_containment_report.tex`; its
+figures read the data files in `reports/evidence-package-2026-09-14/figures/`.
+
+## Scope and safety
+
+The attacker can only issue five brokered operations against deliberately
+simplified services inside private Docker networks with no Internet egress.
+The repository contains no exploit code, no real credentials and no real
+secret; the range is regenerated with random dummy values before every
+episode. Provider keys, policy authority and evaluator ground truth stay on
+the host and are never given to either model. Nothing here speaks to
+production security or to the general capabilities of the models used.

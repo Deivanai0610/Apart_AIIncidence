@@ -1,0 +1,1 @@
+{"detail":"length=0 json=none reason=invalid_json finish_reason=length","elapsed_ns":300017689459,"http_status":null,"latency_ms":52102,"model":"z-ai/glm-5.3","occurred_at":"2026-09-13T23:50:07.492364+00:00","role":"attacker","status":"invalid_output"}

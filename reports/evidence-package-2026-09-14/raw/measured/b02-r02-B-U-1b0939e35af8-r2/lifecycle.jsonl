@@ -1,0 +1,3 @@
+{"elapsed_ns":null,"episode_id":"b02-r02-B-U-1b0939e35af8-r2","occurred_at":"2026-09-14T00:06:12.411500+00:00","setup_elapsed_ns":261833,"status":"starting"}
+{"elapsed_ns":1521042,"episode_id":"b02-r02-B-U-1b0939e35af8-r2","occurred_at":"2026-09-14T00:06:13.385835+00:00","status":"running"}
+{"elapsed_ns":300102163958,"episode_id":"b02-r02-B-U-1b0939e35af8-r2","horizon_canceled_action_count":0,"in_flight_action_count":0,"in_flight_at_quarantine":0,"occurred_at":"2026-09-14T00:11:13.488931+00:00","queued_action_cancellation_count":0,"status":"terminal","termination_reason":"canary_quarantine"}

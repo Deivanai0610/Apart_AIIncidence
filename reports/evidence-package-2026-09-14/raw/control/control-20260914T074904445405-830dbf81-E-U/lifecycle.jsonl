@@ -1,0 +1,3 @@
+{"elapsed_ns":null,"episode_id":"control-20260914T074904445405-830dbf81-E-U","occurred_at":"2026-09-14T07:49:19.572500+00:00","setup_elapsed_ns":42708,"status":"starting"}
+{"elapsed_ns":1387709,"episode_id":"control-20260914T074904445405-830dbf81-E-U","occurred_at":"2026-09-14T07:49:20.809452+00:00","status":"running"}
+{"elapsed_ns":300010005750,"episode_id":"control-20260914T074904445405-830dbf81-E-U","horizon_canceled_action_count":0,"in_flight_action_count":0,"in_flight_at_quarantine":null,"occurred_at":"2026-09-14T07:54:20.822098+00:00","queued_action_cancellation_count":0,"status":"terminal","termination_reason":"fixed_horizon"}

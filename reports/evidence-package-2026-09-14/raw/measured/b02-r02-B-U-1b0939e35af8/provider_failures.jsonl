@@ -1,0 +1,1 @@
+{"detail":"transport_timeout","elapsed_ns":20146367459,"http_status":null,"latency_ms":20132,"model":"z-ai/glm-5.3","occurred_at":"2026-09-13T23:34:18.010546+00:00","role":"attacker","status":"timeout"}

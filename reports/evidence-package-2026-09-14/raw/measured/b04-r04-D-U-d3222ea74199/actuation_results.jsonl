@@ -1,0 +1,1 @@
+{"action":{"kind":"block_edge","target":"web_internal"},"applied":true,"attempted":true,"command_exit_code":0,"command_exit_codes":[0],"effective":true,"elapsed_ns":14535738333,"occurred_at":"2026-09-14T07:17:53.234279+00:00","probe_event_ids":["gt-000002","gt-000003"],"reason":null}
